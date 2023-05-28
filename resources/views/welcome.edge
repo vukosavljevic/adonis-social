@@ -1,0 +1,16 @@
+@layout('layouts/app')
+
+@section('content')
+      @each(post in posts)
+      <div class="border-2 bg-white w-9/12 my-6">
+        <div class="flex space-y-6" style="justify-content: space-between">
+        <p class="m-5">Author - {{post.user.name}}</p>
+        <i class="fa-solid fa-x mr-5 hover:cursor-pointer"></i>
+        </div>
+        <img src="{{post.image}}" width="100%" alt="">
+        <div>
+        </div>
+        <p class="m-5">{{ post.caption }}</p>
+      </div>
+      @endeach
+@endsection
