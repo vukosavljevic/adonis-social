@@ -25,6 +25,7 @@
       <div>
         @if(auth.isAuthenticated)
           <a href="/{{ auth.user.username}}">Profile</a>
+          <a href="/followings">Prijatelji</a>
         @else
         <a href="/login">Login</a>
         @endif

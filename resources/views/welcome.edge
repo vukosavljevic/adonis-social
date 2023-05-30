@@ -2,15 +2,24 @@
 
 @section('content')
       @each(post in posts)
-      <div class="border-2 bg-white w-9/12 my-6">
+      <div class="border-2 bg-white w-9/12 my-6" style="margin-left: 10rem">
         <div class="flex space-y-6" style="justify-content: space-between">
         <p class="m-5">Author - {{post.user.name}}</p>
-        <i class="fa-solid fa-x mr-5 hover:cursor-pointer"></i>
         </div>
         <img src="{{post.image}}" width="100%" alt="">
         <div>
         </div>
+        <div class="flex align-center">
+          <div class="flex mt-5 ml-7">
+            <p class="mr-2 mb-5">10</p>
+            <form action="" d>
+            <button disabled="disabled">
+              <i class="fa-regular fa-thumbs-up" style="margin-top:0.2rem"></i>
+            </button>
+          </form>
+          </div>
         <p class="m-5">{{ post.caption }}</p>
+      </div>
       </div>
       @endeach
 @endsection

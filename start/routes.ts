@@ -20,25 +20,34 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', 'HomeController.index');
+Route.get('/', 'HomeController.index')
+
+Route.get('/login', async ({ view }) => {
+  return view.render('auth/login')
+}).middleware('guest')
+Route.post('/login', 'AuthController.login');
 
 Route.get('/signup', async ({ view }) => {
   return view.render('auth/signup')
 }).middleware('guest')
 Route.post('/signup', 'AuthController.signup');
-
-Route.get('/login', async ({ view }) => {
-  return view.render('auth/login')
-}).middleware('guest')
-
-Route.post('/login', 'AuthController.login');
+// Route.get('/google/redirect', 'AuthController.social');
+Route.get('/google/redirect', async ({ ally }) => {
+  return ally.use('google').redirect()
+})
 
 Route.post('/logout', 'AuthController.logout');
 
-Route.get('/posts/create', 'PostsController.create')
+Route.get('/posts', 'PostsController.index')
+Route.delete('/posts/:id','PostsController.destroy')
+Route.get('/posts/create', 'PostsController.create').middleware('auth')
 Route.post('/posts/create', 'PostsController.store').middleware('auth')
 
+Route.get('/follow', 'FollowsController.index')
+Route.get('/followings', 'FollowsController.show')
 Route.post('/follow/:userid', 'FollowsController.store').middleware('auth')
-Route.delete('/follow/:userid', 'FollowsController.destroy').middleware('auth')
+Route.delete('/follow/:deleteid', 'FollowsController.destroy').middleware('auth')
 
 Route.get('/:username', 'ProfilesController.index').middleware('auth')
+
+Route.get('/first', 'PostsController.index')

@@ -59,8 +59,30 @@ export default class AuthController {
       return response.badRequest('Invalid credentials')
     }
   }
+  public async social({ ally,auth }: HttpContextContract) {
+    const google = ally.use('google')
 
-  public async logout({response,auth}: HttpContextContract) {
+    /**
+     * Managing error states here
+     */
+
+    const googleUser = await google.user()
+
+    /**
+     * Find the user by email or create
+     * a new one
+     */
+
+    const user = await User.firstOrCreate({
+      email: googleUser.email,
+    }, {
+      name: googleUser.name,
+      accessToken: googleUser.token.token,
+      isVerified: googleUser.emailVerificationState === 'verified'
+    })
+    await auth.use('web').login(user)
+  }
+  public async logout({ response, auth }: HttpContextContract) {
     await auth.logout();
     return response.redirect('/')
   }

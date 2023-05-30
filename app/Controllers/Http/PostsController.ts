@@ -4,6 +4,10 @@ import { schema } from '@ioc:Adonis/Core/Validator';
 import Post from 'App/Models/Post'
 
 export default class PostsController {
+  public async index() {
+    const posts = await Post.query()
+    return posts;
+  }
   public async create({ view }: HttpContextContract) {
     return view.render('posts/create')
   }
@@ -32,11 +36,16 @@ export default class PostsController {
     post.caption = req.caption
     post.userId = auth.user.id
 
-    post.save()
+    await post.save()
 
-    return response.redirect(`/${auth.user.username}`)
+    return response.redirect(`/${auth.user?.username}`)
   }
-  public async profile({ response, auth }: HttpContextContract) {
-    return response.redirect(`/${auth.user.username}`)
+  public async destroy({ response, params }: HttpContextContract) {
+    const post = Post.query().where('id', params.id);
+    await post.delete()
+    return response.redirect().back()
+  }
+  public async like({ }: HttpContextContract) {
+
   }
 }
