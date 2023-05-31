@@ -5,7 +5,7 @@ export default class HomeController {
   public async index({ view }: HttpContextContract) {
     const posts = await Post
       .query()
-      .preload('user')
+      .preload('user').preload('likes');
     return view.render('welcome', { posts })
   }
 }

@@ -11,10 +11,15 @@
         </div>
         <div class="flex align-center">
           <div class="flex mt-5 ml-7">
-            <p class="mr-2 mb-5">10</p>
-            <form action="" d>
-            <button disabled="disabled">
-              <i class="fa-regular fa-thumbs-up" style="margin-top:0.2rem"></i>
+            <p class="mr-2 mb-5">{{ post.likes.length }}</p>
+            <form action="{{`/like/${post.id}`}}" method="post">
+            <button>
+              <i class="fa-regular fa-thumbs-up" style="margin-top:0.2rem margin-left:0.2rem"></i>
+            </button>
+          </form>
+          <form action="{{`/dislike/${post.id}?_method=DELETE`}}" method="post" style="margin-left:1rem">
+            <button>
+              <i class="fa-regular fa-thumbs-down" style="margin-top:0.2rem margin-left:0.2rem"></i>
             </button>
           </form>
           </div>

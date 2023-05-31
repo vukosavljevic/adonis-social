@@ -25,18 +25,23 @@ Route.get('/', 'HomeController.index')
 Route.get('/login', async ({ view }) => {
   return view.render('auth/login')
 }).middleware('guest')
-Route.post('/login', 'AuthController.login');
+Route.post('/signup', 'AuthController.signup')
+Route.post('/login', 'AuthController.login')
+
 
 Route.get('/signup', async ({ view }) => {
   return view.render('auth/signup')
 }).middleware('guest')
-Route.post('/signup', 'AuthController.signup');
 // Route.get('/google/redirect', 'AuthController.social');
 Route.get('/google/redirect', async ({ ally }) => {
   return ally.use('google').redirect()
 })
 
-Route.post('/logout', 'AuthController.logout');
+Route.post('/logout', 'AuthController.logout')
+
+Route.post('/like/:postid', 'LikesController.increment')
+Route.delete('/dislike/:postid', 'LikesController.reduce')
+
 
 Route.get('/posts', 'PostsController.index')
 Route.delete('/posts/:id','PostsController.destroy')
@@ -49,5 +54,3 @@ Route.post('/follow/:userid', 'FollowsController.store').middleware('auth')
 Route.delete('/follow/:deleteid', 'FollowsController.destroy').middleware('auth')
 
 Route.get('/:username', 'ProfilesController.index').middleware('auth')
-
-Route.get('/first', 'PostsController.index')
