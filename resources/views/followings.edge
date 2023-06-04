@@ -2,10 +2,12 @@
 
 @section('content')
       @each(follow in follows)
+      <a href="{{`/${follow.name}`}}">
       <div class="border-2 bg-white w-9/12 my-6" style="margin-left: 10rem">
         <div class="flex space-y-6" style="justify-content: space-between">
         <p class="m-5"> {{follow.name}}</p>
         </div>
       </div>
+      </a>
       @endeach
 @endsection

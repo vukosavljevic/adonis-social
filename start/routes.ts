@@ -32,10 +32,12 @@ Route.post('/login', 'AuthController.login')
 Route.get('/signup', async ({ view }) => {
   return view.render('auth/signup')
 }).middleware('guest')
-// Route.get('/google/redirect', 'AuthController.social');
+
+// SOCIAL LOGIN
 Route.get('/google/redirect', async ({ ally }) => {
   return ally.use('google').redirect()
 })
+Route.get('/google','AuthController.google')
 
 Route.post('/logout', 'AuthController.logout')
 
@@ -44,7 +46,8 @@ Route.delete('/dislike/:postid', 'LikesController.reduce')
 
 
 Route.get('/posts', 'PostsController.index')
-Route.delete('/posts/:id','PostsController.destroy')
+Route.delete('/posts/:id', 'PostsController.destroy')
+Route.post('/posts/update/:id','PostsController.update').middleware('auth')
 Route.get('/posts/create', 'PostsController.create').middleware('auth')
 Route.post('/posts/create', 'PostsController.store').middleware('auth')
 
@@ -53,4 +56,8 @@ Route.get('/followings', 'FollowsController.show')
 Route.post('/follow/:userid', 'FollowsController.store').middleware('auth')
 Route.delete('/follow/:deleteid', 'FollowsController.destroy').middleware('auth')
 
+Route.get('/profile/edit','ProfilesController.edit').middleware('auth')
+Route.post('/profile/edit','ProfilesController.update').middleware('auth')
+Route.delete('/profile/delete','ProfilesController.delete').middleware('auth')
 Route.get('/:username', 'ProfilesController.index').middleware('auth')
+

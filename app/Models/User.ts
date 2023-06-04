@@ -26,6 +26,12 @@ export default class User extends BaseModel {
   @column()
   public password: string
 
+  @column()
+  public accessToken: Blob
+
+  @column()
+  public isVerified: string
+
   @hasMany(() => Post)
   public posts: HasMany<typeof Post>
 

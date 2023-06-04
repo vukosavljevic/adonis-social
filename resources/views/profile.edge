@@ -5,6 +5,14 @@
         <div class="w-8/12">
             <div class="flex">
                 <h1 class="text-2xl tracking-wide">{{ user.username }}</h1>
+                @if(auth.user.id === user.id)
+                <a href="/profile/edit" class="border border-gray-400 mx-4 rounded px-2 pt-1 font-semibold">Edit</a>
+                @endif
+                @if(auth.user.id === user.id)
+                <form action="/profile/delete?_method=DELETE" method="post">
+                <button  class="border border-gray-400 mx-4 rounded px-2 pt-1 font-semibold">Delete</button>
+              </form>
+                @endif
                 @if(auth.user.id != user.id)
                 <div>
                 @if(auth.user.followings.map(f => f.followingId).includes(user.id))
@@ -30,6 +38,11 @@
               <article class="grid grid-cols-3 gap-10 px-1">
             @each(post in user.posts)
            <div>
+            @if(auth.user.id === user.id)
+            <form action="{{`/posts/update/${post.id}`}}" method="post">
+            <button>EDIT</button>
+            </form>
+           @endif
             @if(auth.user.id === user.id)
             <form action="{{`/posts/${post.id}?_method=DELETE`}}" method="post">
             <button><i class="fa-solid fa-x mr-5 hover:cursor-pointer"></i></button>

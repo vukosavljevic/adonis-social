@@ -10,6 +10,8 @@ export default class extends BaseSchema {
       table.string('email').index()
       table.string('password')
       table.string('username',25).index()
+      table.string('access_token')
+      table.string('is_verified')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
@@ -21,3 +23,4 @@ export default class extends BaseSchema {
     this.schema.dropTable(this.tableName)
   }
 }
+

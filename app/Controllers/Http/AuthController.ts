@@ -59,7 +59,11 @@ export default class AuthController {
       return response.badRequest('Invalid credentials')
     }
   }
-  public async social({ ally,auth }: HttpContextContract) {
+  public async logout({ response, auth }: HttpContextContract) {
+    await auth.logout();
+    return response.redirect('/')
+  }
+  public async google({ response, ally, auth }: HttpContextContract) {
     const google = ally.use('google')
 
     /**
@@ -72,18 +76,19 @@ export default class AuthController {
      * Find the user by email or create
      * a new one
      */
-
     const user = await User.firstOrCreate({
       email: googleUser.email,
     }, {
+      username: googleUser.name,
       name: googleUser.name,
       accessToken: googleUser.token.token,
       isVerified: googleUser.emailVerificationState === 'verified'
     })
+
+    /**
+     * Login user using the web guard
+     */
     await auth.use('web').login(user)
-  }
-  public async logout({ response, auth }: HttpContextContract) {
-    await auth.logout();
-    return response.redirect('/')
+    return response.redirect(`/${user.username}`)
   }
 }
