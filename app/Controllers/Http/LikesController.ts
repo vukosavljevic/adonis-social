@@ -2,9 +2,6 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Like from 'App/Models/Like'
 
 export default class LikesController {
-  public async show({ }: HttpContextContract) {
-
-  }
   public async increment({ response, params, auth }: HttpContextContract) {
     const alreadyLiked = await Like.query().where('post_id', params.postid).andWhere('user_id',auth.user.id);
     if (alreadyLiked.length > 0) {

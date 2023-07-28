@@ -20,7 +20,10 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', 'HomeController.index')
+Route.get('/', 'HomeController.welcome')
+Route.get('/feed', 'HomeController.index')
+Route.get('/jobs/publish','JobsController.page')
+Route.get('/discover', 'ProfilesController.show')
 
 Route.get('/login', async ({ view }) => {
   return view.render('auth/login')
@@ -28,7 +31,7 @@ Route.get('/login', async ({ view }) => {
 Route.post('/signup', 'AuthController.signup')
 Route.post('/login', 'AuthController.login')
 
-
+Route.get('/jobs', 'JobsController.index')
 Route.get('/signup', async ({ view }) => {
   return view.render('auth/signup')
 }).middleware('guest')

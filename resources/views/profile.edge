@@ -1,16 +1,17 @@
-@layout('layouts/app')
+@layout('layouts/subapp')
 
 @section('content')
       <div class="mt-10 flex justify-between flex-wrap w-full">
         <div class="w-8/12">
-            <div class="flex">
-                <h1 class="text-2xl tracking-wide">{{ user.username }}</h1>
+            <div class="flex items-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="" class="p-2 bg-white" style="border-radius:50px; width:84px;">
+                <h1 class="text-2xl tracking-wide ml-5">{{ user.username }}</h1>
                 @if(auth.user.id === user.id)
-                <a href="/profile/edit" class="border border-gray-400 mx-4 rounded px-2 pt-1 font-semibold">Edit</a>
+                <a href="/profile/edit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-5" style="height:100%;">Edit</a>
                 @endif
                 @if(auth.user.id === user.id)
                 <form action="/profile/delete?_method=DELETE" method="post">
-                <button  class="border border-gray-400 mx-4 rounded px-2 pt-1 font-semibold">Delete</button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-5">Delete</button>
               </form>
                 @endif
                 @if(auth.user.id != user.id)
@@ -27,9 +28,18 @@
             </div>
             @endif
             </div>
+            <div class="mt-5">
+             @if(user.description === null)
+             <p>User has not yet set up his description</p>
+             @else
+             <p>
+              {{ user.description}}
+             </p>
+              @endif
+            </div>
         </div>
 
-        <section class="border-t w-full mt-20">
+        <section class="border-t w-full mt-10">
             <h2 class="text-center text-sm p-2">Objave
               @if(auth.user.id === user.id)
                <a href="/posts/create"><i class="fas fa-plus"></i></a>
@@ -37,18 +47,18 @@
               </h2>
               <article class="grid grid-cols-3 gap-10 px-1">
             @each(post in user.posts)
-           <div>
-            @if(auth.user.id === user.id)
-            <form action="{{`/posts/update/${post.id}`}}" method="post">
-            <button>EDIT</button>
-            </form>
-           @endif
+           <div class="w-80 h-80" style="width:100%;">
             @if(auth.user.id === user.id)
             <form action="{{`/posts/${post.id}?_method=DELETE`}}" method="post">
             <button><i class="fa-solid fa-x mr-5 hover:cursor-pointer"></i></button>
             </form>
            @endif
-            <img src="{{post.image}}" class="w-64 h-48 border" alt="">
+           @if(post.video !== null)
+           <iframe class="border" src="{{post.video}}" style="height:300px; width:100%;" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+           @else
+           <img src="{{post.image}}" class="border" alt="" style="height:300px; width:100%;">
+           @endif
+
           </div>
             @endeach
             </article>

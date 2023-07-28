@@ -1,6 +1,11 @@
 @layout('layouts/app')
 
 @section('content')
+<style>
+  .display{
+    display: block !important;
+  }
+</style>
 <div class="mt-20 bg-white border rounded p-5">
 
   <h1 class="text-center text-2xl my-4">Create New Post</h1>
@@ -9,11 +14,37 @@
     <p class="my-2">Description</p>
     <textarea class="border w-full" name="caption" rows="4"></textarea>
   </div>
+  <button class="first-btn">Link to your video</button>
+  <div class="prvi" style="display: none">
+    <div>
+      <p class="my-2">Paste link that you find in youtube embed</p>
+      <textarea class="border w-full" name="video" rows="4" value=""></textarea>
+    </div>
+  </div>
+  <button class="second-btn">Upload your image</button>
+  <div class="drugi" style="display: none">
   <div class="my-5">
-    <p class="my-2">Upload your post</p>
     <input type="file" name="image" class="w-full">
   </div>
+</div>
+<br>
   <input type="submit" value="Upload" class="px-2 py-1 bg-blue-500 text-white border rounder">
   </form>
 </div>
+<script>
+  const button = document.querySelector('.first-btn');
+  const secondButton = document.querySelector('.second-btn');
+  const prvi = document.querySelector('.prvi')
+  const drugi = document.querySelector('.drugi')
+
+  button.addEventListener('click',(e)=>{
+    e.preventDefault();
+    prvi.classList.toggle("display");
+  })
+
+  secondButton.addEventListener('click',(e)=>{
+    e.preventDefault();
+    drugi.classList.toggle("display");
+  })
+  </script>
 @endsection

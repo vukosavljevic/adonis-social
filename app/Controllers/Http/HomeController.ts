@@ -6,6 +6,9 @@ export default class HomeController {
     const posts = await Post
       .query()
       .preload('user').preload('likes');
-    return view.render('welcome', { posts })
+    return view.render('feed', { posts })
+  }
+  public async welcome({view} : HttpContextContract){
+    return view.render('welcome')
   }
 }

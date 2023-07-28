@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>DroneHub</title>
 </head>
-<body class="bg-gray-100 flex flex-col">
-  <nav class="w-1/2 bg-white shadow-md flex justify-between px-4 py-4 m-auto gap-4 z-10 relative">
+<body class="bg-gray-100 flex flex-col items-center">
+  <nav class="w-1/2 bg-white shadow-md flex justify-between px-4 py-4 m-auto gap-4 z-10 relative mb-6">
     <div class="w-1/2 flex">
       <div class="flex">
       <h1 class="text-xl font-semibold">
@@ -17,14 +17,14 @@
       </h1>
       <div class="flex items-center justify-items-center ml-5">
         @if(auth.isAuthenticated)
-          <img src="https://cdn-icons-png.flaticon.com/512/3391/3391229.png" alt="" style="height:24px; width:24px; margin-left:1rem">
-          <a href="/feed" style="margin-left:0.5rem">Feed</a>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="" style="height:24px; width:24px; margin-left:1rem" >
-          <a href="/discover" style="margin-left:0.5rem">Discover</a>
-          <img src="https://cdn.icon-icons.com/icons2/154/PNG/512/users_21945.png" alt="" style="height:24px; width:24px; margin-left:1rem" >
-          <a href="/followings" style="margin-left:0.5rem">Friends</a>
-          <img src="https://cdn-icons-png.flaticon.com/512/2505/2505264.png" alt="" style="height:20px; width:20px; margin-left:1rem">
-          <a href="/jobs" style="margin-left:0.5rem">Jobs</a>
+        <img src="https://cdn-icons-png.flaticon.com/512/3391/3391229.png" alt="" style="height:24px; width:24px; margin-left:1rem">
+        <a href="/feed" style="margin-left:0.5rem">Feed</a>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="" style="height:24px; width:24px; margin-left:1rem" >
+        <a href="/discover" style="margin-left:0.5rem">Discover</a>
+        <img src="https://cdn.icon-icons.com/icons2/154/PNG/512/users_21945.png" alt="" style="height:24px; width:24px; margin-left:1rem" >
+        <a href="/followings" style="margin-left:0.5rem">Friends</a>
+        <img src="https://cdn-icons-png.flaticon.com/512/2505/2505264.png" alt="" style="height:20px; width:20px; margin-left:1rem">
+        <a href="/jobs" style="margin-left:0.5rem">Jobs</a>
         @endif
       </div>
     </div>
@@ -45,7 +45,7 @@
     </div>
   </nav>
   <div class="bg-gray-100 min-h-screen flex flex-col items-center">
-    <div class="w-full" style="width:60%">
+    <div class="w-full" style="width:80vw;margin:0 auto;">
     @section('content')
     @endsection
     </div>

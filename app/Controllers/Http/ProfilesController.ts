@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Post from 'App/Models/Post';
 import User from 'App/Models/User';
 
 export default class ProfilesController {
@@ -14,18 +15,26 @@ export default class ProfilesController {
 
     return view.render('profile', { user })
   }
+  public async show({ view }: HttpContextContract){
+    const users = await User.query();
+    return view.render('accounts/show', { users })
+  }
   public async edit({ view }: HttpContextContract) {
     return view.render('accounts/edit')
   }
   public async update({ response, auth, request }: HttpContextContract) {
     const user = auth.user;
     const ime = request.input(['username']);
+    const opis = request.input(['description'])
     user.username = ime;
+    user.description = opis;
     await user.save();
     return response.redirect(`/${ime}`)
   }
   public async delete({ response,auth }: HttpContextContract){
     const user = auth.user;
+    const post = Post.query().where('user_id', auth.user.id);
+    await post.delete()
     await user.delete()
     return response.redirect('/login')
   }

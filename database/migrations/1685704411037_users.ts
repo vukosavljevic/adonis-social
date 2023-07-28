@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.string('name')
       table.string('email').index()
       table.string('password')
+      table.string('description')
       table.string('username',25).index()
       table.string('access_token')
       table.string('is_verified')

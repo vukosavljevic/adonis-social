@@ -1,11 +1,37 @@
-@layout('layouts/app')
+@layout('layouts/subapp')
 
 @section('content')
-  <h1>Update your name</h1>
+<div class="w-2/3 bg-white p-12" style="margin:auto; border:1px solid gray; margin-top:5rem">
+  <h1 class="text-2xl mb-5">Uredi profil</h1>
+  <hr class="mb-5">
+  <div class="flex">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="" style="width:84px; height:84px;">
+  <div>
+  <h1>  {{ auth.user.username }}</h1>
+  <a href="/" style="color:blue;">Promjeni sliku profila</a>
+  <p>Ovime mjenjate sliku vašeg profila koji se pokazuje na poslovima, feedu i samom vašem profilu!</p>
+  </div>
+</div>
+<div class="flex" style="margin:2rem 0;">
+  <h1 class="font-bold">Novo ime</h1>
   <form action="" method="post">
     <label for="username">
-      <input type="text" name="username">
+      <input type="text" name="username" style="border:1px solid black; width:20vw; margin-left:1rem;">
     </label>
-    <input type="submit">
-  </form>
+</div>
+<div class="mb-5">
+  <p>Samo gledajte da izabrano ime koje želite se ne podudara sa vašim starim imenom ili da to ime već ne postoji na ovoj socijalnoj mreži.</p>
+</div>
+<hr class="mb-5">
+  <div class="flex mb-5">
+  <h1 class="font-bold">Opis profila</h1>
+    <label for="description">
+      <input type="text" name="description" style="border:1px solid black; width:20vw; margin-left:1rem; height:5vh">
+    </label>
+</div>
+<hr class="mb-5">
+<p class="mb-5">Kada ste završili sa svim uređivanjima pritisnite tipku spremi da prihvatite vaše nove promjene. I pazite na to da će to što ste napisali biti vidljivo svima i da morate poštovati pravila regulacije!</p>
+<input type="submit" value="Spremi" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" />
+</form>
+</div>
 @endsection

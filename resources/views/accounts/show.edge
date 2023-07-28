@@ -1,0 +1,16 @@
+@layout('layouts/subapp')
+
+@section('content')
+@each(user in users)
+@if(user.username === auth.user.username)
+@else
+<a href="{{`/${user.username}`}}">
+  <div class="border-2 bg-white w-9/12 my-6" style="margin:auto;">
+    <div class="flex space-y-6" style="justify-content: space-between">
+    <p class="m-5"> {{user.username}}</p>
+    </div>
+  </div>
+  </a>
+  @endif
+@endeach
+@endsection

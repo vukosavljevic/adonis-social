@@ -11,6 +11,9 @@ export default class Post extends BaseModel {
   public image: string
 
   @column()
+  public video: Blob
+
+  @column()
   public caption: string
 
   @column()

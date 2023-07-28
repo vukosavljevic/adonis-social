@@ -1,13 +1,20 @@
-@layout('layouts/app')
+@layout('layouts/subapp')
 
 @section('content')
+      @if(follows.length > 0)
       @each(follow in follows)
-      <a href="{{`/${follow.name}`}}">
-      <div class="border-2 bg-white w-9/12 my-6" style="margin-left: 10rem">
+      <a href="{{`/${follow.username}`}}">
+      <div class="border-2 bg-white w-9/12 my-6" style="margin:auto;">
         <div class="flex space-y-6" style="justify-content: space-between">
-        <p class="m-5"> {{follow.name}}</p>
+        <p class="m-5"> {{follow.username}}</p>
         </div>
       </div>
       </a>
       @endeach
+      @else
+      <div class="text-center font-2xl font-bold">
+        <h1 class="mb-5">You don't have any friends yet, don't worry we ourselves needed few years to get our first friends...</h1>
+                <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5 text-center" style="margin:auto;" href="/discover">Discover people</a>
+      </div>
+      @endif
 @endsection
