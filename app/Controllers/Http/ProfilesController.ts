@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Following from 'App/Models/Following';
 import Post from 'App/Models/Post';
 import User from 'App/Models/User';
 
@@ -11,9 +12,11 @@ export default class ProfilesController {
       return view.render('errors.not-found')
     }
     await user.load('posts')
-    await auth.user.load('followings')
-
-    return view.render('profile', { user })
+    await auth.user?.load('followings')
+    const followings = auth.user?.followings.map(f => f.followingId)
+    //neradi za loadanje prijatelja
+    const follows = await User.query().whereIn('id', followings);
+    return view.render('profile', { user,follows })
   }
   public async show({ view }: HttpContextContract){
     const users = await User.query();

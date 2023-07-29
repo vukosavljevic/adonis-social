@@ -5,30 +5,33 @@
   .display{
     display: block !important;
   }
+  .none{
+    display:none !important;
+  }
 </style>
 <div class="mt-20 bg-white border rounded p-5">
 
-  <h1 class="text-center text-2xl my-4">Create New Post</h1>
+  <h1 class="text-center text-2xl my-4">Create New Job offer</h1>
   <form action="/posts/create" method="post" enctype="multipart/form-data" class="py-2">
   <div>
     <p class="my-2">Description</p>
     <textarea class="border w-full" name="caption" rows="4"></textarea>
   </div>
-  <button class="first-btn">Link to your video</button>
+  <button class="first-btn px-2 bg-blue-500 text-white border rounder p-2">Link to your video</button>
   <div class="prvi" style="display: none">
     <div>
       <p class="my-2">Paste link that you find in youtube embed</p>
       <textarea class="border w-full" name="video" rows="4" value=""></textarea>
     </div>
   </div>
-  <button class="second-btn">Upload your image</button>
+  <button class="second-btn px-2 bg-blue-500 text-white border rounder p-2">Upload your image</button>
   <div class="drugi" style="display: none">
-  <div class="my-5">
+  <div class="mt-3">
     <input type="file" name="image" class="w-full">
   </div>
 </div>
 <br>
-  <input type="submit" value="Upload" class="px-2 py-1 bg-blue-500 text-white border rounder">
+  <input type="submit" value="Upload" class="submit none px-2 bg-blue-500 text-white border rounder p-2">
   </form>
 </div>
 <script>
@@ -36,15 +39,20 @@
   const secondButton = document.querySelector('.second-btn');
   const prvi = document.querySelector('.prvi')
   const drugi = document.querySelector('.drugi')
+  const submit = document.querySelector('.submit');
 
   button.addEventListener('click',(e)=>{
     e.preventDefault();
     prvi.classList.toggle("display");
+    secondButton.classList.toggle("none");
+    submit.classList.toggle("none");
   })
 
   secondButton.addEventListener('click',(e)=>{
     e.preventDefault();
     drugi.classList.toggle("display");
+    button.classList.toggle("none");
+    submit.classList.toggle("none");
   })
   </script>
 @endsection
